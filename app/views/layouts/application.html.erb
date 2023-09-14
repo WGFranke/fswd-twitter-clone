@@ -2,16 +2,22 @@
 <html>
   <head>
     <title>Twitter</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
-    <%= stylesheet_pack_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    
+
+    <!-- loading bootstrap css font awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= yield %>
   </body>
 </html>
