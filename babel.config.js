@@ -17,6 +17,14 @@ module.exports = function(api) {
 
   return {
     presets: [
+      [
+        '@babel/preset-react',
+        {
+          targets: {
+            node: 'current'
+          }
+        }
+      ],
       isTestEnv && [
         '@babel/preset-env',
         {
@@ -54,13 +62,13 @@ module.exports = function(api) {
         }
       ],
       [
-        '@babel/plugin-transform-private-methods',
+        '@babel/plugin-proposal-private-methods',
         {
           loose: true
         }
       ],
       [
-        '@babel/plugin-transform-private-property-in-object',
+        '@babel/plugin-proposal-private-property-in-object',
         {
           loose: true
         }

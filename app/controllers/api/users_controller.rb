@@ -15,6 +15,7 @@ module Api
     private
 
     def user_params
+      puts params.to_yaml
       params.require(:user).permit(:email, :password, :username)
     end
   end
