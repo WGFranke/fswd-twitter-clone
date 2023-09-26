@@ -1,26 +1,29 @@
 // layout.jsx
 import React from 'react';
+import { safeCredentials, handleErrors } from './fetchHelper';
 
 const Layout = (props) => {
-  function SignUpButtonClick() {
-    function authenRedirect() {
-      authenticate(function(response) {
-        if(response.authenticated) {
-          window.location.replace("/feeds");
-        }
-      });
-    };
-  }
+ 
   function handleSubmitLogIn(e) {
     // Prevent the browser from reloading the page
-    e.preventDefault();
+     // Prevent the browser from reloading the page
+     e.preventDefault();
 
-    // Read the form data
-    const form = e.target;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    fetch('api/sessions', { method: form.method, body: {'user':formJson} });
+     // Read the form data
+     const form = e.target;
+     const formData = new FormData(form);
+ 
+     const formJson = Object.fromEntries(formData.entries());
+     fetch('api/session', safeCredentials({
+       method: 'POST',
+       body: JSON.stringify({
+         user: formJson
+       })
+     }))
+     .then(handleErrors)
+     .then(res => {
+       console.log(res);
+     })
   }
   function handleSubmitSignUp(e) {
     // Prevent the browser from reloading the page
@@ -31,7 +34,17 @@ const Layout = (props) => {
     const formData = new FormData(form);
 
     const formJson = Object.fromEntries(formData.entries());
-    fetch('api/users', { method: form.method, body: {'user':formJson} });
+    fetch('api/users', safeCredentials({
+      method: 'POST',
+      body: JSON.stringify({
+        user: formJson
+      })
+    }))
+    .then(handleErrors)
+    .then(() => {
+    window.location.replace('./feeds');
+  })
+
   }
   return (
     <React.Fragment>

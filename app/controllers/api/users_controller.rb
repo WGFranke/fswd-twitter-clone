@@ -6,16 +6,13 @@ module Api
       if @user.save
         render 'api/users/create'
       else
-        render json: {
-          success: false
-        }
+        @user.errors
       end
     end
 
     private
 
     def user_params
-      puts params.to_yaml
       params.require(:user).permit(:email, :password, :username)
     end
   end

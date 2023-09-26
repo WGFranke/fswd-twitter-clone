@@ -1,4 +1,5 @@
 import React from 'react';
+import { safeCredentials, handleErrors } from './fetchHelper';
 
 const Feeds = (props) => {
   return (
