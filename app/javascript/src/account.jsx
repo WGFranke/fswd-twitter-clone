@@ -1,17 +1,17 @@
 // home.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from './layout';
+import Feeds from './feeds';
 
-const Home = () => (
-  <Layout>
-    <h1>Home page</h1>
-  </Layout>
+const Account = () => (
+  <Feeds>
+    <h1>Account Page</h1>
+  </Feeds>
 )
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Home />,
+    <Account />,
     document.body.appendChild(document.createElement('div')),
   )
 })
