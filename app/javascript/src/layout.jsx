@@ -13,7 +13,7 @@ const Layout = (props) => {
      const formData = new FormData(form);
  
      const formJson = Object.fromEntries(formData.entries());
-     fetch('api/session', safeCredentials({
+     fetch('api/sessions', safeCredentials({
        method: 'POST',
        body: JSON.stringify({
          user: formJson
