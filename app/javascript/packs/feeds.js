@@ -1,1 +1,1 @@
-import 'src/feeds';
+import 'src/account';
