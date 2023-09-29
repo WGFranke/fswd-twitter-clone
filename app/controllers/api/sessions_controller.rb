@@ -5,6 +5,8 @@ module Api
 
       if @user && (BCrypt::Password.new(@user.password) == params[:user][:password])
         session = @user.sessions.create
+        puts "hello"
+        puts session.token 
         cookies.permanent.signed[:twitter_session_token] = {
           value: session.token,
           httponly: true
@@ -12,6 +14,7 @@ module Api
 
         render 'api/sessions/create'
       else
+        puts "i hate myself"
         render json: {
           success: false
         }

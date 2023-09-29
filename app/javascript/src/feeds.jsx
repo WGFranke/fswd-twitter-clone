@@ -2,6 +2,68 @@ import React from 'react';
 import { safeCredentials, handleErrors } from './fetchHelper';
 
 const Feeds = (props) => {
+  const ref = React.useRef(null);
+  const [tweets, setTweets] = React.useState([]);
+
+  const Feed = (props) => {
+    
+
+
+    const tweetsList = tweets.map(tweet =>
+      <div className="tweet col-xs-12">
+      <a className="tweet-username" href="#">
+        User
+      </a>
+      <a className="tweet-screenName" href="#">
+        @User
+      </a>
+      <p>{tweet.message}</p>
+      <a className="delete-tweet" href="#">
+        Delete
+      </a>
+      </div>
+    );
+    return (
+    <React.Fragment>
+      <>
+      <div className="feed">{tweetsList}</div>
+      </>
+    </React.Fragment>);
+  } 
+
+
+  function RefreshTweets(response) {
+    console.log(response);
+    setTweets(response.tweets);
+    setTweets([{message: 'howdy'}, {message: 'partner'}]);
+  }
+
+  function GetTweets() {
+    fetch('api/tweets', safeCredentials({
+      method: 'GET'
+    }))
+    .then(handleErrors)
+    .then(res => {
+      RefreshTweets(res);
+    })
+  }
+
+
+  function CreateTweet(event) {
+    fetch('api/tweets', safeCredentials({
+      method: 'POST',
+      body: JSON.stringify({
+        tweet: {
+          message: ref.current.value,
+          image:''
+        }
+      })
+    }))
+    .then(GetTweets);
+  }
+
+
+
   return (
     <React.Fragment>
       <>
@@ -144,7 +206,8 @@ const Feeds = (props) => {
       </div>
       <div className="col-xs-6 feed-box">
         <div className="col-xs-12 post-tweet-box">
-          <textarea
+          <textarea id="tweetbox"
+            ref={ref}
             type="text"
             className="form-control post-input"
             rows={3}
@@ -168,43 +231,12 @@ const Feeds = (props) => {
               accept="image/*"
             />
             <span className="post-char-counter">140</span>
-            <button className="btn btn-primary" disabled="" id="post-tweet-btn">
-              Tweet
+            <button className="btn btn-primary" disabled="" id="post-tweet-btn" onClick={CreateTweet}>
+              Tweet 
             </button>
           </div>
         </div>
-        <div className="feed">
-          <div className="tweet col-xs-12">
-            <a className="tweet-username" href="#">
-              User
-            </a>
-            <a className="tweet-screenName" href="#">
-              @User
-            </a>
-            <p>This is an amazing tweet</p>
-            <a className="delete-tweet" href="#">
-              Delete
-            </a>
-          </div>
-          <div className="tweet col-xs-12">
-            <a className="tweet-username" href="#">
-              User
-            </a>
-            <a className="tweet-screenName" href="#">
-              @User
-            </a>
-            <p>This is an amazing tweet</p>
-          </div>
-          <div className="tweet col-xs-12">
-            <a className="tweet-username" href="#">
-              User
-            </a>
-            <a className="tweet-screenName" href="#">
-              @User
-            </a>
-            <p>This is an amazing tweet</p>
-          </div>
-        </div>
+        <Feed></Feed>
       </div>
       <div className="col-xs-3 follow-suggest"></div>
     </div>

@@ -81,23 +81,23 @@
 
 //   //------------------- Post Tweet --------------------
 
-//   $(document).on('click', '#post-tweet-btn', function() {
-//     var imageSelect = document.getElementById('image-select');
-//     var image = imageSelect.files[0];
-//     postTweet($('.post-input').val(), image, function(result) {
-//       if(result.success) {
-//         $('.post-input').val('');
-//         imageSelect.value = '';
-//         $('#image-preview').attr('src', '#');
-//         $('#image-preview').hide();
-//         getTweetsAndPost();
-//         charCount();
-//         getUserTweets(currentUser, function(response) {
-//         $('.user-stats-tweets').text(response.length);
-//       });
-//       }
-//     });
-//   });
+  // $(document).on('click', '#post-tweet-btn', function() {
+  //   var imageSelect = document.getElementById('image-select');
+  //   var image = imageSelect.files[0];
+  //   postTweet($('.post-input').val(), image, function(result) {
+  //     if(result.success) {
+  //       $('.post-input').val('');
+  //       imageSelect.value = '';
+  //       $('#image-preview').attr('src', '#');
+  //       $('#image-preview').hide();
+  //       getTweetsAndPost();
+  //       charCount();
+  //       getUserTweets(currentUser, function(response) {
+  //       $('.user-stats-tweets').text(response.length);
+  //     });
+  //     }
+  //   });
+  // });
 
 //   //--------------- Get Tweets ----------------
 
